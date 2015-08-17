@@ -1,0 +1,44 @@
+#OpenCV
+
+#Installation:
+
+Install using Homebrew: (Note that this may take a while)
+
+`brew tap homebrew/science`
+
+Then,
+
+`brew install opencv`
+
+Also, it might fail to install some dependencies, so try to install them independently
+and then run `brew install opencv` again.
+
+After installation is done, you can find the openCV libraries at `/usr/local/lib`
+
+##Xcode Set up
+
+###Set up for every project:
+* In your projects build settings search for `search paths`
+* In the `Header Search Paths` add the following two lines
+  * `\usr\local\include`
+  * `\usr\local\lib`
+* In the `Library Search Paths` add `\user\local\lib`
+* In the `Build Phases -> Link Binary with Libraries`
+  click the `+` and then `add other...` press / and type in
+  `\usr\local\lib` add `libopencv_imgproc` and `libopencv_core`
+
+Then you need to link the library files for the parts of opencv
+you're importing into your project.
+
+### Initial XCode Setup:
+After you're done with the set up above, it might not work right away,
+and throw you an error saying a certain library wasn't found in `/usr/local/lib`.
+
+Look at the Xcode error logs, when you try to run.
+
+To fix this:
+
+* Run `mdfind libraryname`
+* Then `sudo ln -s locationOfLibrary/library.dylib /usr/local/lib/library.dylib`
+
+Example: `sudo ln -s /usr/local/Cellar/ilmbase/2.1.0/lib/libIexMath-2_1.11.dylib /usr/local/lib/libIexMath-2_1.11.dylib`
